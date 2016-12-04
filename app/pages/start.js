@@ -4,7 +4,8 @@ import {
   Text,
   ScrollView,
   ListView,
-  View
+  View,
+  TextInput
 } from 'react-native';
 import { connect } from 'react-redux';
 import * as actionCreators from '../redux/action-creators/index';
@@ -15,6 +16,9 @@ class Start extends Component {
 
   constructor(props){
     super(props);
+    this.state = {
+      text: ''
+    }
   }
 
   getTodos(text){
@@ -28,7 +32,13 @@ class Start extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-      <Text onPress={() => this.getTodos('Teste')}>
+      <TextInput
+       placeholder={'ADD TODO HERE'}
+       style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+       onChangeText={(text) => this.setState({text})}
+       value={this.state.text}
+       />
+      <Text onPress={() => this.getTodos(this.state.text)}>
       Add Todo
       </Text>
       { this.props.todos.map((todo) => {
