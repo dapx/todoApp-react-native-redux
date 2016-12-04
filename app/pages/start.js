@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../redux/action-creators/index';
 let nextTodoId = 0;
 
-
 class Start extends Component {
 
   constructor(props){
@@ -42,7 +41,14 @@ class Start extends Component {
       Add Todo
       </Text>
       { this.props.todos.map((todo) => {
-          return (<Text key={todo.id} onPress={() => this.toggleTodo(todo.id)}>{todo.text}</Text>);
+          return (
+            <Text
+             key={todo.id}
+             style={{ textDecorationLine: todo.completed ? 'line-through' : 'none' }}
+             onPress={() => this.toggleTodo(todo.id)}>
+             {todo.text}
+             </Text>
+           );
         })
       }
       </ScrollView>
